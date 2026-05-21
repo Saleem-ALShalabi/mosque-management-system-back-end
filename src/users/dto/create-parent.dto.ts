@@ -1,0 +1,11 @@
+import { createZodDto } from "nestjs-zod";
+import { email, z } from 'zod';
+
+const CreateParentSchema = z.object({
+    name: z.string().min(2),
+    username: z.string().min(3),
+    password: z.string().min(6),
+    email: z.string().email().optional(),
+});
+
+export class CreateParentDto extends createZodDto(CreateParentSchema) { }

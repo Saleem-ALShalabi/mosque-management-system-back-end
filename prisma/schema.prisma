@@ -1,0 +1,234 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  admin
+  teacher
+  parent
+  child
+}
+
+enum PointSource {
+  manual
+  quran
+  exam
+  subject_complete
+}
+
+enum PointStandardType {
+  per_quran_page
+  exam_pass
+  subject_complete
+  manual
+}
+
+enum AnswerOption {
+  a
+  b
+  c
+  d
+}
+
+model User {
+  id                  String    @id @default(uuid())
+  name                String
+  username            String    @unique
+  email               String?   @unique
+  passwordHash        String
+  role                Role
+  isActive            Boolean   @default(true)
+  resetPasswordCode   String?
+  resetPasswordExpiry DateTime?
+  createdAt           DateTime  @default(now())
+
+  taughtClasses    Class[]
+  childAccount     Child?             @relation("ChildUser")
+  childrenAsParent Child[]            @relation("ParentChildren")
+  quranRecorded    QuranProgress[]
+  pointsAwarded    PointTransaction[] @relation("PointsAwardedBy")
+  subjectsTaught   Subject[]
+}
+
+model Class {
+  id           String    @id @default(uuid())
+  name         String
+  teacherId    String
+  academicYear Int
+  createdAt    DateTime  @default(now())
+  teacher      User      @relation(fields: [teacherId], references: [id])
+  children     Child[]
+  subjects     Subject[]
+}
+
+model Child {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  classId     String
+  parentId    String?
+  name        String
+  birthYear   Int
+  photoUrl    String?
+  totalPoints Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  user              User                @relation("ChildUser", fields: [userId], references: [id])
+  class             Class               @relation(fields: [classId], references: [id])
+  parent            User?               @relation("ParentChildren", fields: [parentId], references: [id])
+  enrollments       SubjectEnrollment[]
+  examAttempts      ExamAttempt[]
+  quranProgress     QuranProgress[]
+  pointTransactions PointTransaction[]
+  attendances       Attendance[]
+}
+
+model SubjectEnrollment {
+  id        String   @id @default(uuid())
+  childId   String
+  subjectId String
+  createdAt DateTime @default(now())
+  child     Child    @relation(fields: [childId], references: [id])
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+
+  @@unique([childId, subjectId])
+}
+
+model Subject {
+  id               String   @id @default(uuid())
+  classId          String
+  teacherId        String
+  title            String
+  startDate        DateTime
+  endDate          DateTime
+  isActive         Boolean  @default(true)
+  attendancePoints Int      @default(0)
+  createdAt        DateTime @default(now())
+
+  class              Class               @relation(fields: [classId], references: [id])
+  teacher            User                @relation(fields: [teacherId], references: [id])
+  lessons            Lesson[]
+  exams              Exam[]
+  subjectEnrollments SubjectEnrollment[]
+}
+
+model Attendance {
+  id        String   @id @default(uuid())
+  childId   String
+  lessonId  String
+  points    Int
+  scannedAt DateTime @default(now())
+  child     Child    @relation(fields: [childId], references: [id])
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+
+  @@unique([childId, lessonId])
+}
+
+model Lesson {
+  id        String   @id @default(uuid())
+  subjectId String
+  title     String
+  pdfUrl    String
+  order     Int
+  isVisible Boolean  @default(true)
+  qrCode    String?
+  createdAt DateTime @default(now())
+
+  subject     Subject      @relation(fields: [subjectId], references: [id])
+  attendances Attendance[]
+}
+
+model Exam {
+  id          String   @id @default(uuid())
+  subjectId   String
+  title       String
+  totalMarks  Int
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  subject   Subject       @relation(fields: [subjectId], references: [id])
+  questions Question[]
+  attempts  ExamAttempt[]
+}
+
+model Question {
+  id            String       @id @default(uuid())
+  examId        String
+  text          String
+  optionA       String
+  optionB       String
+  optionC       String
+  optionD       String
+  correctOption AnswerOption
+  points        Int
+
+  exam    Exam            @relation(fields: [examId], references: [id])
+  answers AttemptAnswer[]
+}
+
+model ExamAttempt {
+  id          String   @id @default(uuid())
+  examId      String
+  childId     String
+  score       Int      @default(0)
+  isReviewed  Boolean  @default(false)
+  isPublished Boolean  @default(false)
+  submittedAt DateTime @default(now())
+
+  exam    Exam            @relation(fields: [examId], references: [id])
+  child   Child           @relation(fields: [childId], references: [id])
+  answers AttemptAnswer[]
+}
+
+model AttemptAnswer {
+  id             String       @id @default(uuid())
+  attemptId      String
+  questionId     String
+  selectedOption AnswerOption
+  isCorrect      Boolean
+
+  attempt  ExamAttempt @relation(fields: [attemptId], references: [id])
+  question Question    @relation(fields: [questionId], references: [id])
+}
+
+model QuranProgress {
+  id            String   @id @default(uuid())
+  childId       String
+  teacherId     String
+  pageNumber    Int
+  pointsAwarded Int
+  recordedAt    DateTime @default(now())
+
+  child   Child @relation(fields: [childId], references: [id])
+  teacher User  @relation(fields: [teacherId], references: [id])
+}
+
+model PointTransaction {
+  id        String      @id @default(uuid())
+  childId   String
+  awardedBy String
+  points    Int
+  source    PointSource
+  note      String?
+  createdAt DateTime    @default(now())
+
+  child         Child @relation(fields: [childId], references: [id])
+  awardedByUser User  @relation("PointsAwardedBy", fields: [awardedBy], references: [id])
+}
+
+model PointStandard {
+  id          String            @id @default(uuid())
+  type        PointStandardType
+  points      Int
+  description String
+  updatedAt   DateTime          @updatedAt
+}
