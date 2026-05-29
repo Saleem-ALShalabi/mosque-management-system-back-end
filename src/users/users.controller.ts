@@ -17,7 +17,7 @@ export class UsersController {
 
     @Post('teacher')
     createTeacher(@Body() dto: CreateTeacherDto) {
-        this.userService.createTeacher(dto);
+        return this.userService.createTeacher(dto);
     }
 
     @Post('parent')
