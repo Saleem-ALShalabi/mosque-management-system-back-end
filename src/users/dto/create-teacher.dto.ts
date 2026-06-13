@@ -1,5 +1,5 @@
 import { createZodDto } from "nestjs-zod";
-import { email, z } from "zod";
+import { z } from "zod";
 
 const CreateTeacherSchema = z.object({
     name: z.string().min(2),

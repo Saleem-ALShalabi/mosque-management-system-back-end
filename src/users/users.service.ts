@@ -1,7 +1,6 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
-import { tr } from 'zod/v4/locales';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { CreateParentDto } from './dto/create-parent.dto';
