@@ -375,6 +375,11 @@ export type ClassSumOrderByAggregateInput = {
   academicYear?: Prisma.SortOrder
 }
 
+export type ClassNullableScalarRelationFilter = {
+  is?: Prisma.ClassWhereInput | null
+  isNot?: Prisma.ClassWhereInput | null
+}
+
 export type ClassScalarRelationFilter = {
   is?: Prisma.ClassWhereInput
   isNot?: Prisma.ClassWhereInput
@@ -436,10 +441,12 @@ export type ClassCreateNestedOneWithoutChildrenInput = {
   connect?: Prisma.ClassWhereUniqueInput
 }
 
-export type ClassUpdateOneRequiredWithoutChildrenNestedInput = {
+export type ClassUpdateOneWithoutChildrenNestedInput = {
   create?: Prisma.XOR<Prisma.ClassCreateWithoutChildrenInput, Prisma.ClassUncheckedCreateWithoutChildrenInput>
   connectOrCreate?: Prisma.ClassCreateOrConnectWithoutChildrenInput
   upsert?: Prisma.ClassUpsertWithoutChildrenInput
+  disconnect?: Prisma.ClassWhereInput | boolean
+  delete?: Prisma.ClassWhereInput | boolean
   connect?: Prisma.ClassWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClassUpdateToOneWithWhereWithoutChildrenInput, Prisma.ClassUpdateWithoutChildrenInput>, Prisma.ClassUncheckedUpdateWithoutChildrenInput>
 }
