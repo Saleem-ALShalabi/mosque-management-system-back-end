@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ClassModule } from './class/class.module';
 import { SubjectModule } from './subject/subject.module';
+import { LessonModule } from './lesson/lesson.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -15,6 +16,7 @@ import { SubjectModule } from './subject/subject.module';
     UsersModule,
     ClassModule,
     SubjectModule,
+    LessonModule,
   ],
   controllers: [AppController],
   providers: [AppService],

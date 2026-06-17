@@ -210,7 +210,7 @@ export type ChildGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type ChildGroupByOutputType = {
   id: string
   userId: string
-  classId: string | null
+  classId: string
   parentId: string | null
   name: string
   birthYear: number
@@ -245,7 +245,7 @@ export type ChildWhereInput = {
   NOT?: Prisma.ChildWhereInput | Prisma.ChildWhereInput[]
   id?: Prisma.StringFilter<"Child"> | string
   userId?: Prisma.StringFilter<"Child"> | string
-  classId?: Prisma.StringNullableFilter<"Child"> | string | null
+  classId?: Prisma.StringFilter<"Child"> | string
   parentId?: Prisma.StringNullableFilter<"Child"> | string | null
   name?: Prisma.StringFilter<"Child"> | string
   birthYear?: Prisma.IntFilter<"Child"> | number
@@ -253,7 +253,7 @@ export type ChildWhereInput = {
   totalPoints?: Prisma.IntFilter<"Child"> | number
   createdAt?: Prisma.DateTimeFilter<"Child"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  class?: Prisma.XOR<Prisma.ClassNullableScalarRelationFilter, Prisma.ClassWhereInput> | null
+  class?: Prisma.XOR<Prisma.ClassScalarRelationFilter, Prisma.ClassWhereInput>
   parent?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   enrollments?: Prisma.SubjectEnrollmentListRelationFilter
   examAttempts?: Prisma.ExamAttemptListRelationFilter
@@ -265,7 +265,7 @@ export type ChildWhereInput = {
 export type ChildOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  classId?: Prisma.SortOrderInput | Prisma.SortOrder
+  classId?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
@@ -288,7 +288,7 @@ export type ChildWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ChildWhereInput | Prisma.ChildWhereInput[]
   OR?: Prisma.ChildWhereInput[]
   NOT?: Prisma.ChildWhereInput | Prisma.ChildWhereInput[]
-  classId?: Prisma.StringNullableFilter<"Child"> | string | null
+  classId?: Prisma.StringFilter<"Child"> | string
   parentId?: Prisma.StringNullableFilter<"Child"> | string | null
   name?: Prisma.StringFilter<"Child"> | string
   birthYear?: Prisma.IntFilter<"Child"> | number
@@ -296,7 +296,7 @@ export type ChildWhereUniqueInput = Prisma.AtLeast<{
   totalPoints?: Prisma.IntFilter<"Child"> | number
   createdAt?: Prisma.DateTimeFilter<"Child"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  class?: Prisma.XOR<Prisma.ClassNullableScalarRelationFilter, Prisma.ClassWhereInput> | null
+  class?: Prisma.XOR<Prisma.ClassScalarRelationFilter, Prisma.ClassWhereInput>
   parent?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   enrollments?: Prisma.SubjectEnrollmentListRelationFilter
   examAttempts?: Prisma.ExamAttemptListRelationFilter
@@ -308,7 +308,7 @@ export type ChildWhereUniqueInput = Prisma.AtLeast<{
 export type ChildOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  classId?: Prisma.SortOrderInput | Prisma.SortOrder
+  classId?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
@@ -328,7 +328,7 @@ export type ChildScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ChildScalarWhereWithAggregatesInput | Prisma.ChildScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Child"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Child"> | string
-  classId?: Prisma.StringNullableWithAggregatesFilter<"Child"> | string | null
+  classId?: Prisma.StringWithAggregatesFilter<"Child"> | string
   parentId?: Prisma.StringNullableWithAggregatesFilter<"Child"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"Child"> | string
   birthYear?: Prisma.IntWithAggregatesFilter<"Child"> | number
@@ -345,7 +345,7 @@ export type ChildCreateInput = {
   totalPoints?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutChildAccountInput
-  class?: Prisma.ClassCreateNestedOneWithoutChildrenInput
+  class: Prisma.ClassCreateNestedOneWithoutChildrenInput
   parent?: Prisma.UserCreateNestedOneWithoutChildrenAsParentInput
   enrollments?: Prisma.SubjectEnrollmentCreateNestedManyWithoutChildInput
   examAttempts?: Prisma.ExamAttemptCreateNestedManyWithoutChildInput
@@ -357,7 +357,7 @@ export type ChildCreateInput = {
 export type ChildUncheckedCreateInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   parentId?: string | null
   name: string
   birthYear: number
@@ -379,7 +379,7 @@ export type ChildUpdateInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutChildAccountNestedInput
-  class?: Prisma.ClassUpdateOneWithoutChildrenNestedInput
+  class?: Prisma.ClassUpdateOneRequiredWithoutChildrenNestedInput
   parent?: Prisma.UserUpdateOneWithoutChildrenAsParentNestedInput
   enrollments?: Prisma.SubjectEnrollmentUpdateManyWithoutChildNestedInput
   examAttempts?: Prisma.ExamAttemptUpdateManyWithoutChildNestedInput
@@ -391,7 +391,7 @@ export type ChildUpdateInput = {
 export type ChildUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
@@ -408,7 +408,7 @@ export type ChildUncheckedUpdateInput = {
 export type ChildCreateManyInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   parentId?: string | null
   name: string
   birthYear: number
@@ -429,7 +429,7 @@ export type ChildUpdateManyMutationInput = {
 export type ChildUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
@@ -697,7 +697,7 @@ export type ChildCreateWithoutUserInput = {
   photoUrl?: string | null
   totalPoints?: number
   createdAt?: Date | string
-  class?: Prisma.ClassCreateNestedOneWithoutChildrenInput
+  class: Prisma.ClassCreateNestedOneWithoutChildrenInput
   parent?: Prisma.UserCreateNestedOneWithoutChildrenAsParentInput
   enrollments?: Prisma.SubjectEnrollmentCreateNestedManyWithoutChildInput
   examAttempts?: Prisma.ExamAttemptCreateNestedManyWithoutChildInput
@@ -708,7 +708,7 @@ export type ChildCreateWithoutUserInput = {
 
 export type ChildUncheckedCreateWithoutUserInput = {
   id?: string
-  classId?: string | null
+  classId: string
   parentId?: string | null
   name: string
   birthYear: number
@@ -735,7 +735,7 @@ export type ChildCreateWithoutParentInput = {
   totalPoints?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutChildAccountInput
-  class?: Prisma.ClassCreateNestedOneWithoutChildrenInput
+  class: Prisma.ClassCreateNestedOneWithoutChildrenInput
   enrollments?: Prisma.SubjectEnrollmentCreateNestedManyWithoutChildInput
   examAttempts?: Prisma.ExamAttemptCreateNestedManyWithoutChildInput
   quranProgress?: Prisma.QuranProgressCreateNestedManyWithoutChildInput
@@ -746,7 +746,7 @@ export type ChildCreateWithoutParentInput = {
 export type ChildUncheckedCreateWithoutParentInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   name: string
   birthYear: number
   photoUrl?: string | null
@@ -787,7 +787,7 @@ export type ChildUpdateWithoutUserInput = {
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  class?: Prisma.ClassUpdateOneWithoutChildrenNestedInput
+  class?: Prisma.ClassUpdateOneRequiredWithoutChildrenNestedInput
   parent?: Prisma.UserUpdateOneWithoutChildrenAsParentNestedInput
   enrollments?: Prisma.SubjectEnrollmentUpdateManyWithoutChildNestedInput
   examAttempts?: Prisma.ExamAttemptUpdateManyWithoutChildNestedInput
@@ -798,7 +798,7 @@ export type ChildUpdateWithoutUserInput = {
 
 export type ChildUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
@@ -834,7 +834,7 @@ export type ChildScalarWhereInput = {
   NOT?: Prisma.ChildScalarWhereInput | Prisma.ChildScalarWhereInput[]
   id?: Prisma.StringFilter<"Child"> | string
   userId?: Prisma.StringFilter<"Child"> | string
-  classId?: Prisma.StringNullableFilter<"Child"> | string | null
+  classId?: Prisma.StringFilter<"Child"> | string
   parentId?: Prisma.StringNullableFilter<"Child"> | string | null
   name?: Prisma.StringFilter<"Child"> | string
   birthYear?: Prisma.IntFilter<"Child"> | number
@@ -909,7 +909,7 @@ export type ChildCreateWithoutEnrollmentsInput = {
   totalPoints?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutChildAccountInput
-  class?: Prisma.ClassCreateNestedOneWithoutChildrenInput
+  class: Prisma.ClassCreateNestedOneWithoutChildrenInput
   parent?: Prisma.UserCreateNestedOneWithoutChildrenAsParentInput
   examAttempts?: Prisma.ExamAttemptCreateNestedManyWithoutChildInput
   quranProgress?: Prisma.QuranProgressCreateNestedManyWithoutChildInput
@@ -920,7 +920,7 @@ export type ChildCreateWithoutEnrollmentsInput = {
 export type ChildUncheckedCreateWithoutEnrollmentsInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   parentId?: string | null
   name: string
   birthYear: number
@@ -957,7 +957,7 @@ export type ChildUpdateWithoutEnrollmentsInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutChildAccountNestedInput
-  class?: Prisma.ClassUpdateOneWithoutChildrenNestedInput
+  class?: Prisma.ClassUpdateOneRequiredWithoutChildrenNestedInput
   parent?: Prisma.UserUpdateOneWithoutChildrenAsParentNestedInput
   examAttempts?: Prisma.ExamAttemptUpdateManyWithoutChildNestedInput
   quranProgress?: Prisma.QuranProgressUpdateManyWithoutChildNestedInput
@@ -968,7 +968,7 @@ export type ChildUpdateWithoutEnrollmentsInput = {
 export type ChildUncheckedUpdateWithoutEnrollmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
@@ -989,7 +989,7 @@ export type ChildCreateWithoutAttendancesInput = {
   totalPoints?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutChildAccountInput
-  class?: Prisma.ClassCreateNestedOneWithoutChildrenInput
+  class: Prisma.ClassCreateNestedOneWithoutChildrenInput
   parent?: Prisma.UserCreateNestedOneWithoutChildrenAsParentInput
   enrollments?: Prisma.SubjectEnrollmentCreateNestedManyWithoutChildInput
   examAttempts?: Prisma.ExamAttemptCreateNestedManyWithoutChildInput
@@ -1000,7 +1000,7 @@ export type ChildCreateWithoutAttendancesInput = {
 export type ChildUncheckedCreateWithoutAttendancesInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   parentId?: string | null
   name: string
   birthYear: number
@@ -1037,7 +1037,7 @@ export type ChildUpdateWithoutAttendancesInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutChildAccountNestedInput
-  class?: Prisma.ClassUpdateOneWithoutChildrenNestedInput
+  class?: Prisma.ClassUpdateOneRequiredWithoutChildrenNestedInput
   parent?: Prisma.UserUpdateOneWithoutChildrenAsParentNestedInput
   enrollments?: Prisma.SubjectEnrollmentUpdateManyWithoutChildNestedInput
   examAttempts?: Prisma.ExamAttemptUpdateManyWithoutChildNestedInput
@@ -1048,7 +1048,7 @@ export type ChildUpdateWithoutAttendancesInput = {
 export type ChildUncheckedUpdateWithoutAttendancesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1069,7 +1069,7 @@ export type ChildCreateWithoutExamAttemptsInput = {
   totalPoints?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutChildAccountInput
-  class?: Prisma.ClassCreateNestedOneWithoutChildrenInput
+  class: Prisma.ClassCreateNestedOneWithoutChildrenInput
   parent?: Prisma.UserCreateNestedOneWithoutChildrenAsParentInput
   enrollments?: Prisma.SubjectEnrollmentCreateNestedManyWithoutChildInput
   quranProgress?: Prisma.QuranProgressCreateNestedManyWithoutChildInput
@@ -1080,7 +1080,7 @@ export type ChildCreateWithoutExamAttemptsInput = {
 export type ChildUncheckedCreateWithoutExamAttemptsInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   parentId?: string | null
   name: string
   birthYear: number
@@ -1117,7 +1117,7 @@ export type ChildUpdateWithoutExamAttemptsInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutChildAccountNestedInput
-  class?: Prisma.ClassUpdateOneWithoutChildrenNestedInput
+  class?: Prisma.ClassUpdateOneRequiredWithoutChildrenNestedInput
   parent?: Prisma.UserUpdateOneWithoutChildrenAsParentNestedInput
   enrollments?: Prisma.SubjectEnrollmentUpdateManyWithoutChildNestedInput
   quranProgress?: Prisma.QuranProgressUpdateManyWithoutChildNestedInput
@@ -1128,7 +1128,7 @@ export type ChildUpdateWithoutExamAttemptsInput = {
 export type ChildUncheckedUpdateWithoutExamAttemptsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1149,7 +1149,7 @@ export type ChildCreateWithoutQuranProgressInput = {
   totalPoints?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutChildAccountInput
-  class?: Prisma.ClassCreateNestedOneWithoutChildrenInput
+  class: Prisma.ClassCreateNestedOneWithoutChildrenInput
   parent?: Prisma.UserCreateNestedOneWithoutChildrenAsParentInput
   enrollments?: Prisma.SubjectEnrollmentCreateNestedManyWithoutChildInput
   examAttempts?: Prisma.ExamAttemptCreateNestedManyWithoutChildInput
@@ -1160,7 +1160,7 @@ export type ChildCreateWithoutQuranProgressInput = {
 export type ChildUncheckedCreateWithoutQuranProgressInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   parentId?: string | null
   name: string
   birthYear: number
@@ -1197,7 +1197,7 @@ export type ChildUpdateWithoutQuranProgressInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutChildAccountNestedInput
-  class?: Prisma.ClassUpdateOneWithoutChildrenNestedInput
+  class?: Prisma.ClassUpdateOneRequiredWithoutChildrenNestedInput
   parent?: Prisma.UserUpdateOneWithoutChildrenAsParentNestedInput
   enrollments?: Prisma.SubjectEnrollmentUpdateManyWithoutChildNestedInput
   examAttempts?: Prisma.ExamAttemptUpdateManyWithoutChildNestedInput
@@ -1208,7 +1208,7 @@ export type ChildUpdateWithoutQuranProgressInput = {
 export type ChildUncheckedUpdateWithoutQuranProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1229,7 +1229,7 @@ export type ChildCreateWithoutPointTransactionsInput = {
   totalPoints?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutChildAccountInput
-  class?: Prisma.ClassCreateNestedOneWithoutChildrenInput
+  class: Prisma.ClassCreateNestedOneWithoutChildrenInput
   parent?: Prisma.UserCreateNestedOneWithoutChildrenAsParentInput
   enrollments?: Prisma.SubjectEnrollmentCreateNestedManyWithoutChildInput
   examAttempts?: Prisma.ExamAttemptCreateNestedManyWithoutChildInput
@@ -1240,7 +1240,7 @@ export type ChildCreateWithoutPointTransactionsInput = {
 export type ChildUncheckedCreateWithoutPointTransactionsInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   parentId?: string | null
   name: string
   birthYear: number
@@ -1277,7 +1277,7 @@ export type ChildUpdateWithoutPointTransactionsInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutChildAccountNestedInput
-  class?: Prisma.ClassUpdateOneWithoutChildrenNestedInput
+  class?: Prisma.ClassUpdateOneRequiredWithoutChildrenNestedInput
   parent?: Prisma.UserUpdateOneWithoutChildrenAsParentNestedInput
   enrollments?: Prisma.SubjectEnrollmentUpdateManyWithoutChildNestedInput
   examAttempts?: Prisma.ExamAttemptUpdateManyWithoutChildNestedInput
@@ -1288,7 +1288,7 @@ export type ChildUpdateWithoutPointTransactionsInput = {
 export type ChildUncheckedUpdateWithoutPointTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1304,7 +1304,7 @@ export type ChildUncheckedUpdateWithoutPointTransactionsInput = {
 export type ChildCreateManyParentInput = {
   id?: string
   userId: string
-  classId?: string | null
+  classId: string
   name: string
   birthYear: number
   photoUrl?: string | null
@@ -1320,7 +1320,7 @@ export type ChildUpdateWithoutParentInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutChildAccountNestedInput
-  class?: Prisma.ClassUpdateOneWithoutChildrenNestedInput
+  class?: Prisma.ClassUpdateOneRequiredWithoutChildrenNestedInput
   enrollments?: Prisma.SubjectEnrollmentUpdateManyWithoutChildNestedInput
   examAttempts?: Prisma.ExamAttemptUpdateManyWithoutChildNestedInput
   quranProgress?: Prisma.QuranProgressUpdateManyWithoutChildNestedInput
@@ -1331,7 +1331,7 @@ export type ChildUpdateWithoutParentInput = {
 export type ChildUncheckedUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1347,7 +1347,7 @@ export type ChildUncheckedUpdateWithoutParentInput = {
 export type ChildUncheckedUpdateManyWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.IntFieldUpdateOperationsInput | number
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1487,7 +1487,7 @@ export type ChildSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   totalPoints?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  class?: boolean | Prisma.Child$classArgs<ExtArgs>
+  class?: boolean | Prisma.ClassDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.Child$parentArgs<ExtArgs>
   enrollments?: boolean | Prisma.Child$enrollmentsArgs<ExtArgs>
   examAttempts?: boolean | Prisma.Child$examAttemptsArgs<ExtArgs>
@@ -1508,7 +1508,7 @@ export type ChildSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   totalPoints?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  class?: boolean | Prisma.Child$classArgs<ExtArgs>
+  class?: boolean | Prisma.ClassDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.Child$parentArgs<ExtArgs>
 }, ExtArgs["result"]["child"]>
 
@@ -1523,7 +1523,7 @@ export type ChildSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   totalPoints?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  class?: boolean | Prisma.Child$classArgs<ExtArgs>
+  class?: boolean | Prisma.ClassDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.Child$parentArgs<ExtArgs>
 }, ExtArgs["result"]["child"]>
 
@@ -1542,7 +1542,7 @@ export type ChildSelectScalar = {
 export type ChildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "classId" | "parentId" | "name" | "birthYear" | "photoUrl" | "totalPoints" | "createdAt", ExtArgs["result"]["child"]>
 export type ChildInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  class?: boolean | Prisma.Child$classArgs<ExtArgs>
+  class?: boolean | Prisma.ClassDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.Child$parentArgs<ExtArgs>
   enrollments?: boolean | Prisma.Child$enrollmentsArgs<ExtArgs>
   examAttempts?: boolean | Prisma.Child$examAttemptsArgs<ExtArgs>
@@ -1553,12 +1553,12 @@ export type ChildInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 }
 export type ChildIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  class?: boolean | Prisma.Child$classArgs<ExtArgs>
+  class?: boolean | Prisma.ClassDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.Child$parentArgs<ExtArgs>
 }
 export type ChildIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  class?: boolean | Prisma.Child$classArgs<ExtArgs>
+  class?: boolean | Prisma.ClassDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.Child$parentArgs<ExtArgs>
 }
 
@@ -1566,7 +1566,7 @@ export type $ChildPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "Child"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    class: Prisma.$ClassPayload<ExtArgs> | null
+    class: Prisma.$ClassPayload<ExtArgs>
     parent: Prisma.$UserPayload<ExtArgs> | null
     enrollments: Prisma.$SubjectEnrollmentPayload<ExtArgs>[]
     examAttempts: Prisma.$ExamAttemptPayload<ExtArgs>[]
@@ -1577,7 +1577,7 @@ export type $ChildPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    classId: string | null
+    classId: string
     parentId: string | null
     name: string
     birthYear: number
@@ -1979,7 +1979,7 @@ readonly fields: ChildFieldRefs;
 export interface Prisma__ChildClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  class<T extends Prisma.Child$classArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Child$classArgs<ExtArgs>>): Prisma.Prisma__ClassClient<runtime.Types.Result.GetResult<Prisma.$ClassPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  class<T extends Prisma.ClassDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClassDefaultArgs<ExtArgs>>): Prisma.Prisma__ClassClient<runtime.Types.Result.GetResult<Prisma.$ClassPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   parent<T extends Prisma.Child$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Child$parentArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   enrollments<T extends Prisma.Child$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Child$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubjectEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   examAttempts<T extends Prisma.Child$examAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Child$examAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2422,25 +2422,6 @@ export type ChildDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Children to delete.
    */
   limit?: number
-}
-
-/**
- * Child.class
- */
-export type Child$classArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Class
-   */
-  select?: Prisma.ClassSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Class
-   */
-  omit?: Prisma.ClassOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ClassInclude<ExtArgs> | null
-  where?: Prisma.ClassWhereInput
 }
 
 /**

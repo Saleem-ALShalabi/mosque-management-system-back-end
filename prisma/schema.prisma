@@ -74,7 +74,7 @@ model Class {
 model Child {
   id          String   @id @default(uuid())
   userId      String   @unique
-  classId     String?
+  classId     String
   parentId    String?
   name        String
   birthYear   Int
@@ -83,7 +83,7 @@ model Child {
   createdAt   DateTime @default(now())
 
   user              User                @relation("ChildUser", fields: [userId], references: [id])
-  class             Class?              @relation(fields: [classId], references: [id], onDelete: SetNull)
+  class             Class               @relation(fields: [classId], references: [id])
   parent            User?               @relation("ParentChildren", fields: [parentId], references: [id])
   enrollments       SubjectEnrollment[]
   examAttempts      ExamAttempt[]
@@ -104,17 +104,17 @@ model SubjectEnrollment {
 }
 
 model Subject {
-  id               String   @id @default(uuid())
+  id               String    @id @default(uuid())
   classId          String
   teacherId        String
   title            String
-  startDate        DateTime
-  endDate          DateTime
-  isActive         Boolean  @default(true)
-  attendancePoints Int      @default(0)
-  createdAt        DateTime @default(now())
+  startDate        DateTime  @default(now())
+  endDate          DateTime?
+  isActive         Boolean   @default(true)
+  attendancePoints Int       @default(0)
+  createdAt        DateTime  @default(now())
 
-  class              Class               @relation(fields: [classId], references: [id], onDelete: Cascade)
+  class              Class               @relation(fields: [classId], references: [id])
   teacher            User                @relation(fields: [teacherId], references: [id])
   lessons            Lesson[]
   exams              Exam[]

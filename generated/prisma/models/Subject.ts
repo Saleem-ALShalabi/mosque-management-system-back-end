@@ -209,7 +209,7 @@ export type SubjectGroupByOutputType = {
   teacherId: string
   title: string
   startDate: Date
-  endDate: Date
+  endDate: Date | null
   isActive: boolean
   attendancePoints: number
   createdAt: Date
@@ -244,7 +244,7 @@ export type SubjectWhereInput = {
   teacherId?: Prisma.StringFilter<"Subject"> | string
   title?: Prisma.StringFilter<"Subject"> | string
   startDate?: Prisma.DateTimeFilter<"Subject"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Subject"> | Date | string
+  endDate?: Prisma.DateTimeNullableFilter<"Subject"> | Date | string | null
   isActive?: Prisma.BoolFilter<"Subject"> | boolean
   attendancePoints?: Prisma.IntFilter<"Subject"> | number
   createdAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
@@ -261,7 +261,7 @@ export type SubjectOrderByWithRelationInput = {
   teacherId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
+  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   attendancePoints?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -281,7 +281,7 @@ export type SubjectWhereUniqueInput = Prisma.AtLeast<{
   teacherId?: Prisma.StringFilter<"Subject"> | string
   title?: Prisma.StringFilter<"Subject"> | string
   startDate?: Prisma.DateTimeFilter<"Subject"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Subject"> | Date | string
+  endDate?: Prisma.DateTimeNullableFilter<"Subject"> | Date | string | null
   isActive?: Prisma.BoolFilter<"Subject"> | boolean
   attendancePoints?: Prisma.IntFilter<"Subject"> | number
   createdAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
@@ -298,7 +298,7 @@ export type SubjectOrderByWithAggregationInput = {
   teacherId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
+  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   attendancePoints?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -318,7 +318,7 @@ export type SubjectScalarWhereWithAggregatesInput = {
   teacherId?: Prisma.StringWithAggregatesFilter<"Subject"> | string
   title?: Prisma.StringWithAggregatesFilter<"Subject"> | string
   startDate?: Prisma.DateTimeWithAggregatesFilter<"Subject"> | Date | string
-  endDate?: Prisma.DateTimeWithAggregatesFilter<"Subject"> | Date | string
+  endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Subject"> | Date | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Subject"> | boolean
   attendancePoints?: Prisma.IntWithAggregatesFilter<"Subject"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Subject"> | Date | string
@@ -327,8 +327,8 @@ export type SubjectScalarWhereWithAggregatesInput = {
 export type SubjectCreateInput = {
   id?: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -344,8 +344,8 @@ export type SubjectUncheckedCreateInput = {
   classId: string
   teacherId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -358,7 +358,7 @@ export type SubjectUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -375,7 +375,7 @@ export type SubjectUncheckedUpdateInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -389,8 +389,8 @@ export type SubjectCreateManyInput = {
   classId: string
   teacherId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -400,7 +400,7 @@ export type SubjectUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -412,7 +412,7 @@ export type SubjectUncheckedUpdateManyInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -606,8 +606,8 @@ export type SubjectUpdateOneRequiredWithoutExamsNestedInput = {
 export type SubjectCreateWithoutTeacherInput = {
   id?: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -621,8 +621,8 @@ export type SubjectUncheckedCreateWithoutTeacherInput = {
   id?: string
   classId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -666,7 +666,7 @@ export type SubjectScalarWhereInput = {
   teacherId?: Prisma.StringFilter<"Subject"> | string
   title?: Prisma.StringFilter<"Subject"> | string
   startDate?: Prisma.DateTimeFilter<"Subject"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Subject"> | Date | string
+  endDate?: Prisma.DateTimeNullableFilter<"Subject"> | Date | string | null
   isActive?: Prisma.BoolFilter<"Subject"> | boolean
   attendancePoints?: Prisma.IntFilter<"Subject"> | number
   createdAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
@@ -675,8 +675,8 @@ export type SubjectScalarWhereInput = {
 export type SubjectCreateWithoutClassInput = {
   id?: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -690,8 +690,8 @@ export type SubjectUncheckedCreateWithoutClassInput = {
   id?: string
   teacherId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -729,8 +729,8 @@ export type SubjectUpdateManyWithWhereWithoutClassInput = {
 export type SubjectCreateWithoutSubjectEnrollmentsInput = {
   id?: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -745,8 +745,8 @@ export type SubjectUncheckedCreateWithoutSubjectEnrollmentsInput = {
   classId: string
   teacherId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -774,7 +774,7 @@ export type SubjectUpdateWithoutSubjectEnrollmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -790,7 +790,7 @@ export type SubjectUncheckedUpdateWithoutSubjectEnrollmentsInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -801,8 +801,8 @@ export type SubjectUncheckedUpdateWithoutSubjectEnrollmentsInput = {
 export type SubjectCreateWithoutLessonsInput = {
   id?: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -817,8 +817,8 @@ export type SubjectUncheckedCreateWithoutLessonsInput = {
   classId: string
   teacherId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -846,7 +846,7 @@ export type SubjectUpdateWithoutLessonsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -862,7 +862,7 @@ export type SubjectUncheckedUpdateWithoutLessonsInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -873,8 +873,8 @@ export type SubjectUncheckedUpdateWithoutLessonsInput = {
 export type SubjectCreateWithoutExamsInput = {
   id?: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -889,8 +889,8 @@ export type SubjectUncheckedCreateWithoutExamsInput = {
   classId: string
   teacherId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -918,7 +918,7 @@ export type SubjectUpdateWithoutExamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -934,7 +934,7 @@ export type SubjectUncheckedUpdateWithoutExamsInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -946,8 +946,8 @@ export type SubjectCreateManyTeacherInput = {
   id?: string
   classId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -957,7 +957,7 @@ export type SubjectUpdateWithoutTeacherInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -972,7 +972,7 @@ export type SubjectUncheckedUpdateWithoutTeacherInput = {
   classId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -986,7 +986,7 @@ export type SubjectUncheckedUpdateManyWithoutTeacherInput = {
   classId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -996,8 +996,8 @@ export type SubjectCreateManyClassInput = {
   id?: string
   teacherId: string
   title: string
-  startDate: Date | string
-  endDate: Date | string
+  startDate?: Date | string
+  endDate?: Date | string | null
   isActive?: boolean
   attendancePoints?: number
   createdAt?: Date | string
@@ -1007,7 +1007,7 @@ export type SubjectUpdateWithoutClassInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1022,7 +1022,7 @@ export type SubjectUncheckedUpdateWithoutClassInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1036,7 +1036,7 @@ export type SubjectUncheckedUpdateManyWithoutClassInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendancePoints?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1182,7 +1182,7 @@ export type $SubjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     teacherId: string
     title: string
     startDate: Date
-    endDate: Date
+    endDate: Date | null
     isActive: boolean
     attendancePoints: number
     createdAt: Date
